@@ -27,12 +27,32 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script>
 
+    //履歴を残す配列を定義する
+    const history = [];
+
     $('#pull').on('click', function () {
       const omikuji = ['大吉', '中吉', '小吉', '凶', '大凶'];
       const random = Math.floor(Math.random() * omikuji.length);
       const result = omikuji[random];
       $('#echo').text(result);
+
+      //結果の最新を配列の先頭に保存する
+      history.unshift(result);
+      console.log(history);
+      //履歴として表示する箱を作る
+      const historyHtml = [];
+      //historyHtmlに値を入れる
+      for (let i = 0; i < history.length; i++){
+        historyHtml.push("<p>" + history[i] + "<p>");
+      }
+
+        console.log(historyHtml);
+        //id=historyのところに入れる
+        $("#history").html(historyHtml);
+
     });
+
+
 
   </script>
 

@@ -28,6 +28,26 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script>
 
+  //text_areaの文字列をゲットして保存する
+  $('#save').on('click',function(){
+    const text = $('#text_area').val();
+    console.log('text:',text);
+    localStorage.setItem('memo',text);
+  });
+
+  //text_areaの文字列を削除する
+  $('#clear').on('click',function(){
+    localStorage.removeItem('memo');
+    $('#text_area').val('');
+  });
+  
+  //reloadしても値を保存しておく処理
+  //localStorage.getItem('memo')は何か値が入っているかの判断処理
+  if(localStorage.getItem('memo')){
+    const text = localStorage.getItem('memo');
+    $('#text_area').val(text);
+  }
+
   </script>
 
 </body>

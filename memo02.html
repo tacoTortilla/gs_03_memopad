@@ -29,6 +29,42 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script>
 
+  //text_areaの文字列をゲットして保存する オブジェクト形式->JSON形式
+  //localStrageではオブジェクト形式は扱えないので、JSON形式へ変換する
+  $('#save').on('click',function(){
+    const data = {
+      title: $('#input').val(),
+      text: $('#text_area').val(),
+    };
+    //オブジェクト形式
+    console.log(data);
+    //JSON形式に変換する
+    const json = JSON.stringify(data);
+    console.log(json);
+    //JSON形式のデータを保存する
+    localStorage.setItem('memo',json);
+  });
+
+  //text_areaの文字列を削除する
+  $('#clear').on('click',function(){
+    localStorage.removeItem('memo');
+    $('#input').val('');
+    $('#text_area').val('');
+  });
+  
+  //reloadしても値を保存しておく処理
+  //localStorage.getItem('memo')は何か値が入っているかの判断処理
+  //JSON形式からオブジェクト形式へ変換　JSON.parse
+  if(localStorage.getItem('memo')){
+    const json = localStorage.getItem('memo');
+    console.log(json);
+
+    const data = JSON.parse(json);
+    console.log(data);
+    $('#input').val(data.title);
+    $('#text_area').val(data.text);
+  }
+
   </script>
 
 </body>

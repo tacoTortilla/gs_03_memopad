@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>G's memo</title>
+  <link rel="stylesheet" href="css/sample.css">
+</head>
+
+<body>
+  <header>
+    <h1>一言メモ</h1>
+  </header>
+
+  <main>
+    <div class="table1">
+      <div id="title04"><img src="images/factory08.jpg" class="small_image_width280pix" id="titleImg"></div>
+      <div><textarea id="text_area"></textarea></div>
+    </div>
+    <ul>
+      <li id="next">Next</li>
+      <li id="save">Save</li>
+      <li id="load">Load</li>
+      <li id="clear">Clear</li>
+    </ul>
+
+    <div id="history">
+        <p>イチオシコメントは保存してね</p>
+    </div>
+
+
+  </main>
+
+  <footer>
+    <small>G's</small>
+  </footer>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script>
+
+  //履歴を残す配列を定義する
+  const history = [];
+  
+  // 現在の日付と時間を取得
+  const now = new Date();
+  const formattedDate = now.getFullYear() + "/" + 
+                      (now.getMonth() + 1).toString().padStart(2, '0') + "/" + 
+                      now.getDate().toString().padStart(2, '0') + " " + 
+                      now.getHours().toString().padStart(2, '0') + ":" + 
+                      now.getMinutes().toString().padStart(2, '0');
+
+  //nextをクリックすると次の画像を表示する
+  $('#next').on('click',function(){
+      //写真を次の画像へ変更
+      
+      const images = [
+    'images/factory04.jpg',
+    'images/factory06.jpg',
+    'images/factory08.jpg',
+    'images/factory10.jpg',
+    'images/factory11.jpg',
+    'images/factory12.jpg'
+      ];
+
+    // 0から配列の長さ-1までの乱数を生成
+    const randomIndex = Math.floor(Math.random() * images.length);
+    // ランダムに選ばれた画像に更新
+    $(titleImg).attr('src', images[randomIndex]);
+
+    $('#text_area').val('');
+  });
+
+
+  //text_areaの文字列をゲットして保存する オブジェクト形式->JSON形式
+  //localStrageではオブジェクト形式は扱えないので、JSON形式へ変換する
+  $('#save').on('click',function(){
+
+    // 画像のsrc属性を取得
+    const src = $('#titleImg').attr('src');
+    // srcからファイル名を抽出
+    const fileName = src.split('/').pop();
+    // ファイル名を保存する処理
+    console.log("画像ファイル名:", fileName);
+
+    //写真のデータ名前を保存する
+    const data = {
+      savedImageName: fileName,
+      text: $('#text_area').val(),
+    };
+
+    // ローカルストレージに保存する場合
+    //localStorage.setItem('savedImageName', fileName)
+    
+    //アラート表示
+    // alert("セーブします");
+    //オブジェクト形式
+    console.log(data);
+    //JSON形式に変換する
+    const json = JSON.stringify(data);
+    console.log(json);
+    //JSON形式のデータを保存する
+    localStorage.setItem('memo',json);
+
+    //結果の最新を履歴配列の先頭に保存する
+    //  history.unshift(json);
+    //  console.log(history);
+      //履歴として表示する箱を作る
+    //  const historyHtml = [];
+      //historyHtmlに値を入れる
+    //  console.log(formattedDate);
+    //  for (let i = 0; i < history.length; i++){
+    //    historyHtml.push("<p>"+ formattedDate + " - " + history[i] + "<p>");
+    //  }
+
+    //    console.log(historyHtml);
+        //id=historyのところに入れる
+    //    $("#history").html(historyHtml);
+
+  });
+
+
+  //localStrageに保存されたデータを書き出す
+  $('#load').on('click', function() {
+
+    if(localStorage.getItem('memo')){
+    const json = localStorage.getItem('memo');
+    console.log(json);
+
+    const data = JSON.parse(json);
+    console.log(data);
+
+    // ローカルストレージからファイル名を取得
+    const savedFileNameLoad = data.savedImageName;
+    
+    if (savedFileNameLoad) {
+        // 画像パスを更新
+        $('#titleImg').attr('src', 'images/' + savedFileNameLoad);
+        console.log("画像をロードしました:", savedFileNameLoad);
+    } else {
+        console.log("保存された画像がありません");
+    }
+
+    $('#text_area').val(data.text);
+    }
+
+    });
+
+  //text_areaの文字列を削除する
+  $('#clear').on('click',function(){
+    //アラート表示
+    alert("クリアします");
+    localStorage.removeItem('memo');
+    $('#text_area').val('');
+  });
+  
+  //reloadしても値を保存しておく処理
+  //localStorage.getItem('memo')は何か値が入っているかの判断処理
+  //JSON形式からオブジェクト形式へ変換　JSON.parse
+  if(localStorage.getItem('memo')){
+    const json = localStorage.getItem('memo');
+    console.log(json);
+
+    const data = JSON.parse(json);
+    console.log(data);
+    $('#input').val(data.title);
+    $('#text_area').val(data.text);
+  }
+
+  </script>
+
+</body>
+
+</html>

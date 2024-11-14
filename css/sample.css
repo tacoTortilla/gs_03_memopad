@@ -19,7 +19,7 @@ footer{
     text-align: center;
 }
 p{
-    font-size:200%;
+    font-size:100%;
     text-align: center;
     border-bottom:1px solid #fff;
     height:100px;
@@ -56,13 +56,33 @@ textarea{
     height: 230px;
 }
 
-div{
-  height: 200px;
-  overflow-y: scroll;
-  border: 1px solid #666;
-  margin: 10px;
+
+
+.small_image_width100pix {
+	height: auto; /* 高さは自動調整して縦横比を維持 */
+	width: 100px; /* 幅は100ピクセルに設定 */
 }
-div p{
-  font-size: 1.5rem;
-  height: auto;
+
+.small_image_width70pix {
+	height: auto; /* 高さは自動調整して縦横比を維持 */
+	width: 70px; /* 幅は100ピクセルに設定 */
 }
+
+.small_image_width280pix {
+	height: auto; /* 高さは自動調整して縦横比を維持 */
+	width: 280px; /* 幅は100ピクセルに設定 */
+}
+
+.title{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  padding: 20px;
+  font-size: 20px;
+}
+
+.table1{
+    display: flex;
+    justify-content: center;
+  }
+  

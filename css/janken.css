@@ -1,0 +1,58 @@
+* {
+  margin: 0;
+  box-sizing: border-box;
+}
+
+button {
+  width: 200px;
+  height: 70px;
+}
+
+main {
+  max-width: 720px;
+  height: 100vh;
+  margin: 0 auto;
+}
+
+section {
+  height: calc(100vh/10);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.img_table1{
+  display: flex;
+  justify-content: space-between;/* 水平方向に配置する際に、それぞれの要素の間に等しいスペースを作る */
+}
+
+.small_image_width100pix {
+	height: auto; /* 高さは自動調整して縦横比を維持 */
+	width: 100px; /* 幅は100ピクセルに設定 */
+}
+
+.small_image_width70pix {
+	height: auto; /* 高さは自動調整して縦横比を維持 */
+	width: 70px; /* 幅は100ピクセルに設定 */
+}
+
+.small_image_width460pix {
+	height: auto; /* 高さは自動調整して縦横比を維持 */
+	width: 460px; /* 幅は100ピクセルに設定 */
+}
+
+.title{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  padding: 20px;
+  font-size: 20px;
+}
+
+.titleB{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  padding: 20px;
+  font-size: 40px;
+}
